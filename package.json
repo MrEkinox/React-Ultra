@@ -1,0 +1,29 @@
+{
+  "name": "react-ultra",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "description": "React Native Blur component",
+  "scripts": {
+    "web": "react-scripts start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
+  },
+  "author": "Yannis Caussade",
+  "license": "ISC",
+  "homepage": "https://github.com/MrEkinox/React-Ultra#readme",
+  "alias": {
+    "react-native": "react-native-web"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "react": "^16.12.0",
+    "react-native": "^0.61.5",
+    "react-native-web": "^0.12.0-rc.1"
+  },
+  "devDependencies": {
+    "react-native": "^0.61.5"
+  },
+  "peerDependencies": {
+    "react-native": "^0.61.5"
+  }
+}

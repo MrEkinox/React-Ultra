@@ -1,11 +1,11 @@
 import { GyroscopeData } from "./interfaces";
 
-export default class GyroscopeSensor {
-  isSupported(): boolean {
+class GyroscopeSensor {
+  async isSupported(): Promise<boolean> {
     return "ondeviceorientation" in window;
   }
 
-  addListener(listener: (data: GyroscopeData) => void) {
+  addListener(listener: (data: GyroscopeData) => any) {
     window.addEventListener("deviceorientation", event => {
       listener({ x: event.gamma, y: event.beta, z: event.alpha });
     });
@@ -15,3 +15,5 @@ export default class GyroscopeSensor {
     window.removeEventListener("ondeviceorientation", listener);
   }
 }
+
+export default new GyroscopeSensor()

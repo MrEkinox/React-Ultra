@@ -17,7 +17,7 @@ class BatterySensor {
     return Battery.getLevel();
   }
 
-  addListener(listener: (data: BatteryData) => void) {
+  addListener(listener: (data: BatteryData) => any) {
     batteryEventEmitter.addListener(Battery.BATTERY_CHANGE_EVENT, listener);
   }
 

@@ -10,6 +10,17 @@
 #import <React/RCTLog.h>
 
 @implementation BatterySensor
+{
+    bool hasListeners;
+}
+
+-(void)startObserving {
+    hasListeners = YES;
+}
+
+-(void)stopObserving {
+    hasListeners = NO;
+}
 
 RCT_EXPORT_MODULE();
 
@@ -26,8 +37,6 @@ RCT_REMAP_METHOD(isSupported,
 RCT_REMAP_METHOD(isCharging,isChargingResolver:(RCTPromiseResolveBlock)resolve isChargingRejecter:(RCTPromiseRejectBlock)reject) {
     UIDeviceBatteryState batteryState = [UIDevice currentDevice].batteryState;
     if (batteryState == UIDeviceBatteryStateCharging)
-        resolve(@YES);
-    else if (batteryState == UIDeviceBatteryStateFull)
         resolve(@YES);
     else
         resolve(@NO);
@@ -96,7 +105,8 @@ static const NSString *BATTERY_CHANGE_EVENT = @"batteryChanged";
     [payload setObject:[NSNumber numberWithBool:isCharging] forKey:@"charging"];
     [payload setObject:[NSNumber numberWithFloat:batteryLevel] forKey:@"level"];
     
-    [self sendEventWithName:BATTERY_CHANGE_EVENT body:payload];
+    if (hasListeners)
+        [self sendEventWithName:BATTERY_CHANGE_EVENT body:payload];
 }
 
 @end

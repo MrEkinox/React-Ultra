@@ -5,7 +5,7 @@ class AccelerometerSensor {
     return "ondevicemotion" in window;
   }
 
-  addListener(listener: (data: AccelerometerData) => void) {
+  addListener(listener: (data: AccelerometerData) => any) {
     window.addEventListener("devicemotion", ({ acceleration }) => {
       listener({
         x: acceleration ? acceleration.x : 0,

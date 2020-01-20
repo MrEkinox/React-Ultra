@@ -7,8 +7,21 @@
 //
 
 #import "AccelerometerSensor.h"
+#import <React/RCTLog.h>
 
 @implementation AccelerometerSensor
+{
+    bool hasListeners;
+}
+
+-(void)startObserving {
+    hasListeners = YES;
+}
+
+-(void)stopObserving {
+    hasListeners = NO;
+}
+
 
 RCT_EXPORT_MODULE();
 
@@ -17,7 +30,7 @@ static const NSString *ACCELEROMETER_CHANGE_EVENT = @"AccelerometerChanged";
 - (id) init {
     if (self){
         self->motionManager = [[CMMotionManager alloc] init];
-        self->motionManager.accelerometerUpdateInterval = 1;
+        self->motionManager.accelerometerUpdateInterval = 0.1;
         if ([self->motionManager isAccelerometerAvailable])
         {
             [self->motionManager startAccelerometerUpdates];
@@ -70,11 +83,12 @@ RCT_REMAP_METHOD(isSupported,
     double y = accelerometerData.acceleration.y;
     double z = accelerometerData.acceleration.z;
     
-    [payload setObject:[NSNumber numberWithBool:x] forKey:@"x"];
+    [payload setObject:[NSNumber numberWithFloat:x] forKey:@"x"];
     [payload setObject:[NSNumber numberWithFloat:y] forKey:@"y"];
     [payload setObject:[NSNumber numberWithFloat:z] forKey:@"z"];
     
-    [self sendEventWithName:ACCELEROMETER_CHANGE_EVENT body:payload];
+    if (hasListeners)
+        [self sendEventWithName:ACCELEROMETER_CHANGE_EVENT body:payload];
 }
 
 @end

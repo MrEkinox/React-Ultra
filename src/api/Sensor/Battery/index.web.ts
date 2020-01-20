@@ -19,7 +19,7 @@ class BatterySensor {
     return this.battery.level * 100;
   }
 
-  addListener(listener: (data: BatteryData) => void) {
+  addListener(listener: (data: BatteryData) => any) {
     var data: BatteryData = {
       level: 0,
       charging: false

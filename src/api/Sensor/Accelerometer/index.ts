@@ -9,7 +9,7 @@ class AccelerometerSensor {
     return Accelerometer.isSupported();
   }
 
-  addListener(listener: (data: AccelerometerData) => void) {
+  addListener(listener: (data: AccelerometerData) => any) {
     accelerometerEventEmitter.addListener(
       Accelerometer.ACCELEROMETER_CHANGE_EVENT,
       listener

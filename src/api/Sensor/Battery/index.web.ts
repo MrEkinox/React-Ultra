@@ -1,6 +1,6 @@
 import { BatteryData } from "./interfaces";
 
-export class BatterySensor {
+class BatterySensor {
   navigator: any = navigator;
   battery =
     this.navigator.battery ||
@@ -16,7 +16,7 @@ export class BatterySensor {
   }
 
   async getLevel(): Promise<number> {
-    return this.battery.level;
+    return this.battery.level * 100;
   }
 
   addListener(listener: (data: BatteryData) => void) {
@@ -39,3 +39,5 @@ export class BatterySensor {
     window.removeEventListener("levelchange", listener);
   }
 }
+
+export default new BatterySensor();

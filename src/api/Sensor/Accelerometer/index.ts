@@ -4,7 +4,7 @@ import { AccelerometerData } from "./interfaces";
 const Accelerometer = NativeModules.AccelerometerSensor;
 const accelerometerEventEmitter = new NativeEventEmitter(Accelerometer);
 
-export class AccelerometerSensor {
+class AccelerometerSensor {
   async isSupported(): Promise<boolean> {
     return Accelerometer.isSupported();
   }
@@ -23,3 +23,5 @@ export class AccelerometerSensor {
     );
   }
 }
+
+export default new AccelerometerSensor();

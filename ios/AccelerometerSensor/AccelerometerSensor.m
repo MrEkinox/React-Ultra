@@ -23,7 +23,7 @@ static const NSString *ACCELEROMETER_CHANGE_EVENT = @"AccelerometerChanged";
             [self->motionManager startAccelerometerUpdates];
             [self->motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    @selector(accelerometerChanged:);
+                    [self accelerometerChanged:accelerometerData];
                 });
             }];
         }
@@ -64,11 +64,11 @@ RCT_REMAP_METHOD(isSupported,
     return dispatch_get_main_queue();
 }
 
--(void)accelerometerChanged:(NSNotification*)notification {
+-(void)accelerometerChanged:(CMAccelerometerData*)accelerometerData {
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:3];
-    double x = self->motionManager.accelerometerData.acceleration.x;
-    double y = self->motionManager.accelerometerData.acceleration.y;
-    double z = self->motionManager.accelerometerData.acceleration.z;
+    double x = accelerometerData.acceleration.x;
+    double y = accelerometerData.acceleration.y;
+    double z = accelerometerData.acceleration.z;
     
     [payload setObject:[NSNumber numberWithBool:x] forKey:@"x"];
     [payload setObject:[NSNumber numberWithFloat:y] forKey:@"y"];

@@ -1,6 +1,6 @@
 import { AccelerometerData } from "./interfaces";
 
-export class AccelerometerSensor {
+class AccelerometerSensor {
   async isSupported(): Promise<boolean> {
     return "ondevicemotion" in window;
   }
@@ -19,3 +19,5 @@ export class AccelerometerSensor {
     window.removeEventListener("ondevicemotion", listener);
   }
 }
+
+export default new AccelerometerSensor();

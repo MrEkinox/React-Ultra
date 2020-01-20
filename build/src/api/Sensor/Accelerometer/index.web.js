@@ -28,5 +28,5 @@ class AccelerometerSensor {
         window.removeEventListener("ondevicemotion", listener);
     }
 }
-exports.AccelerometerSensor = AccelerometerSensor;
+exports.default = new AccelerometerSensor();
 //# sourceMappingURL=index.web.js.map

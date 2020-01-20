@@ -7,6 +7,7 @@
 //
 
 #import "BatterySensor.h"
+#import <React/RCTLog.h>
 
 @implementation BatterySensor
 
@@ -15,7 +16,7 @@ RCT_EXPORT_MODULE();
 RCT_REMAP_METHOD(isSupported,
                  isSupportedWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-    UIDeviceBatteryState batteryState = [UIDevice currentDevice].batteryState;
+    Boolean batteryState = [UIDevice currentDevice].isBatteryMonitoringEnabled;
     if (batteryState)
         resolve(@YES);
     else
@@ -26,6 +27,8 @@ RCT_REMAP_METHOD(isCharging,isChargingResolver:(RCTPromiseResolveBlock)resolve i
     UIDeviceBatteryState batteryState = [UIDevice currentDevice].batteryState;
     if (batteryState == UIDeviceBatteryStateCharging)
         resolve(@YES);
+    else if (batteryState == UIDeviceBatteryStateFull)
+        resolve(@YES);
     else
         resolve(@NO);
 }
@@ -34,7 +37,7 @@ RCT_REMAP_METHOD(getLevel,
                  getLevelResolver:(RCTPromiseResolveBlock)resolve
                  getLevelRejecter:(RCTPromiseRejectBlock)reject)
 {
-    float batteryLevel = [UIDevice currentDevice].batteryLevel;
+    float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
     resolve(@(batteryLevel));
 }
 

@@ -28,7 +28,7 @@ class BatterySensor {
     }
     getLevel() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.battery.level;
+            return this.battery.level * 100;
         });
     }
     addListener(listener) {
@@ -50,5 +50,5 @@ class BatterySensor {
         window.removeEventListener("levelchange", listener);
     }
 }
-exports.BatterySensor = BatterySensor;
+exports.default = new BatterySensor();
 //# sourceMappingURL=index.web.js.map

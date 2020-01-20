@@ -15,7 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {BatterySensor} from 'react-ultra';
+import Test from './Test';
 
 import {
   Header,
@@ -30,6 +30,7 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
+        <Test></Test>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>

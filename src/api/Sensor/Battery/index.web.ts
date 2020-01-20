@@ -1,6 +1,6 @@
 import { BatteryData } from "./interfaces";
 
-export default class BatterySensor {
+export class BatterySensor {
   navigator: any = navigator;
   battery =
     this.navigator.battery ||

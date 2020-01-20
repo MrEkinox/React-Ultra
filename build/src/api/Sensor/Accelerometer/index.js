@@ -25,5 +25,5 @@ class AccelerometerSensor {
         accelerometerEventEmitter.removeListener(Accelerometer.ACCELEROMETER_CHANGE_EVENT, listener);
     }
 }
-exports.default = AccelerometerSensor;
+exports.AccelerometerSensor = AccelerometerSensor;
 //# sourceMappingURL=index.js.map

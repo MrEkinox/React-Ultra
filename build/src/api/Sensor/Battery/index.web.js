@@ -50,5 +50,5 @@ class BatterySensor {
         window.removeEventListener("levelchange", listener);
     }
 }
-exports.default = BatterySensor;
+exports.BatterySensor = BatterySensor;
 //# sourceMappingURL=index.web.js.map

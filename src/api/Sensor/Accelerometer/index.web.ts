@@ -1,6 +1,6 @@
 import { AccelerometerData } from "./interfaces";
 
-export default class AccelerometerSensor {
+export class AccelerometerSensor {
   async isSupported(): Promise<boolean> {
     return "ondevicemotion" in window;
   }

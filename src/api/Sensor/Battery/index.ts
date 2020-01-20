@@ -4,7 +4,7 @@ import { BatteryData } from "./interfaces";
 const Battery = NativeModules.BatterySensor;
 const batteryEventEmitter = new NativeEventEmitter(Battery);
 
-export default class BatterySensor {
+export class BatterySensor {
   async isSupported(): Promise<boolean> {
     return Battery.isSupported();
   }

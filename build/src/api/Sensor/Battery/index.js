@@ -35,5 +35,5 @@ class BatterySensor {
         batteryEventEmitter.removeListener(Battery.BATTERY_CHANGE_EVENT, listener);
     }
 }
-exports.default = BatterySensor;
+exports.BatterySensor = BatterySensor;
 //# sourceMappingURL=index.js.map

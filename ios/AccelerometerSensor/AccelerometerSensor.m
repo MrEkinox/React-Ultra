@@ -1,5 +1,5 @@
 //
-//  Accelerometer.m
+//  AccelerometerSensor.m
 //  ReactUltra
 //
 //  Created by Yannis Caussade on 19/01/2020.
@@ -28,6 +28,7 @@ RCT_EXPORT_MODULE();
 static const NSString *ACCELEROMETER_CHANGE_EVENT = @"AccelerometerChanged";
 
 - (id) init {
+    self = [super init];
     if (self){
         self->motionManager = [[CMMotionManager alloc] init];
         self->motionManager.accelerometerUpdateInterval = 0.1;

@@ -1,5 +1,5 @@
 //
-//  Accelerometer.h
+//  AccelerometerSensor.h
 //  ReactUltra
 //
 //  Created by Yannis Caussade on 19/01/2020.
@@ -12,6 +12,6 @@
 #import <CoreMotion/CoreMotion.h>
 
 @interface AccelerometerSensor : RCTEventEmitter <RCTBridgeModule> {
-  CMMotionManager *motionManager;
+    CMMotionManager *motionManager;
 }
 @end

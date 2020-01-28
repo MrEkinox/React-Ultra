@@ -1,27 +1,31 @@
 import {Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {BatterySensor} from 'react-ultra';
+import {MagnetometerSensor} from 'react-ultra';
 import styles from './styles';
 
 interface State {
   recording: boolean;
-  level: number;
-  charging: boolean;
   supported: boolean;
+  data: {
+    x: number;
+    y: number;
+    z: number;
+  };
 }
 
-export default class Battery extends React.PureComponent<{}, State> {
+export default class Magnetometer extends React.PureComponent<{}, State> {
   state: State = {
     recording: true,
-    level: -1,
-    charging: false,
     supported: false,
+    data: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
   };
 
   componentDidMount() {
-    BatterySensor.getLevel().then(level => this.setState({level}));
-    BatterySensor.isCharging().then(charging => this.setState({charging}));
-    BatterySensor.isSupported().then(supported => this.setState({supported}));
+    MagnetometerSensor.isSupported().then(supported => this.setState({supported}));
     this.startListener();
   }
 
@@ -29,17 +33,17 @@ export default class Battery extends React.PureComponent<{}, State> {
     this.stopListener();
   }
 
-  onDataChange = ({level, charging}) => {
-    this.setState({level, charging, recording: true});
+  onDataChange = (data) => {
+    this.setState({data, recording: true});
   };
 
   startListener() {
     this.setState({recording: true});
-    BatterySensor.addListener(this.onDataChange);
+    MagnetometerSensor.addListener(this.onDataChange);
   }
 
   stopListener() {
-    BatterySensor.removeListener(this.onDataChange);
+    MagnetometerSensor.removeListener(this.onDataChange);
     this.setState({recording: false});
   }
 
@@ -50,10 +54,11 @@ export default class Battery extends React.PureComponent<{}, State> {
           this.state.recording ? this.stopListener() : this.startListener()
         }
         style={styles.card}>
-        <Text style={styles.title}>Battery</Text>
+        <Text style={styles.title}>Magnetometer</Text>
         <Text>Recording : {this.state.recording ? 'YES' : 'NO'}</Text>
-        <Text>Level : {this.state.level}</Text>
-        <Text>Charging : {this.state.charging ? 'YES' : 'NO'}</Text>
+        <Text>X : {this.state.data.x}</Text>
+        <Text>Y : {this.state.data.y}</Text>
+        <Text>Z : {this.state.data.z}</Text>
         <Text>Supported : {this.state.supported ? 'YES' : 'NO'}</Text>
       </TouchableOpacity>
     );

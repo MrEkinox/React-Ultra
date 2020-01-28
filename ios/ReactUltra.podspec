@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.platforms    = { ios: '9.0' }
   s.swift_version = '5.0'
   s.source       = { git: 'https://github.com/MrEkinox/React-Ultra', tag: 'master' }
-  s.source_files = '*.{h,m}'
+  s.source_files = '**/*.{h,m}'
   s.requires_arc = true
   s.dependency 'React'
 end

@@ -1,5 +1,5 @@
 //
-//  Gyroscope.m
+//  GyroscopeSensor.m
 //  ReactUltra
 //
 //  Created by Yannis Caussade on 19/01/2020.
@@ -26,7 +26,7 @@ RCT_EXPORT_MODULE();
 static const NSString *GYROSCOPE_CHANGE_EVENT = @"GyroscopeChanged";
 
 - (id) init {
-    self = [super init];
+    self = [super init]; 
     
     if (self){
         self->motionManager = [[CMMotionManager alloc] init];
@@ -36,13 +36,13 @@ static const NSString *GYROSCOPE_CHANGE_EVENT = @"GyroscopeChanged";
             [self->motionManager startGyroUpdates];
             [self->motionManager startGyroUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMGyroData *gyroData, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self gyroscopeChanged:gyroData]
+                    [self gyroscopeChanged:gyroData];
                 });
             }];
         }
     }
     return self;
-}
+} 
 
 -(void)gyroscopeChanged:(CMGyroData*)gyroData {
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:3];

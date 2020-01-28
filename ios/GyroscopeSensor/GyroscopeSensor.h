@@ -1,5 +1,5 @@
 //
-//  Gyroscope.h
+//  GyroscopeSensor.h
 //  ReactUltra
 //
 //  Created by Yannis Caussade on 19/01/2020.

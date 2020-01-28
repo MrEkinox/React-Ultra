@@ -1,7 +1,7 @@
 import { ProximityData } from "./interfaces";
 
 export default class ProximitySensor {
-  isSupported(): boolean {
+  async isSupported(): Promise<boolean> {
     return "ondeviceproximity" in window || "onuserproximity" in window;
   }
 

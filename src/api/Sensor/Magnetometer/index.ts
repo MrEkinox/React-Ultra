@@ -2,7 +2,7 @@ import { NativeModules, NativeEventEmitter } from "react-native";
 import { MagnetometerData } from "./interfaces";
 
 const Magnetometer = NativeModules.MagnetometerSensor;
-const accelerometerEventEmitter = new NativeEventEmitter(Magnetometer);
+const magnetometerEventEmitter = new NativeEventEmitter(Magnetometer);
 
 class MagnetometerSensor {
   async isSupported(): Promise<boolean> {
@@ -10,14 +10,14 @@ class MagnetometerSensor {
   }
 
   addListener(listener: (data: MagnetometerData) => any) {
-    accelerometerEventEmitter.addListener(
+    magnetometerEventEmitter.addListener(
       Magnetometer.MAGNETOMETER_CHANGE_EVENT,
       listener
     );
   }
 
   removeListener(listener) {
-    accelerometerEventEmitter.removeListener(
+    magnetometerEventEmitter.removeListener(
       Magnetometer.ACCELEROMETER_CHANGE_EVENT,
       listener
     );

@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_native_1 = require("react-native");
 const Magnetometer = react_native_1.NativeModules.MagnetometerSensor;
-const accelerometerEventEmitter = new react_native_1.NativeEventEmitter(Magnetometer);
+const magnetometerEventEmitter = new react_native_1.NativeEventEmitter(Magnetometer);
 class MagnetometerSensor {
     isSupported() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -19,10 +19,10 @@ class MagnetometerSensor {
         });
     }
     addListener(listener) {
-        accelerometerEventEmitter.addListener(Magnetometer.MAGNETOMETER_CHANGE_EVENT, listener);
+        magnetometerEventEmitter.addListener(Magnetometer.MAGNETOMETER_CHANGE_EVENT, listener);
     }
     removeListener(listener) {
-        accelerometerEventEmitter.removeListener(Magnetometer.ACCELEROMETER_CHANGE_EVENT, listener);
+        magnetometerEventEmitter.removeListener(Magnetometer.ACCELEROMETER_CHANGE_EVENT, listener);
     }
 }
 exports.default = new MagnetometerSensor();

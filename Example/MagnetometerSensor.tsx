@@ -38,7 +38,6 @@ export default class Magnetometer extends React.PureComponent<{}, State> {
   };
 
   startListener() {
-    this.setState({recording: true});
     MagnetometerSensor.addListener(this.onDataChange);
   }
 

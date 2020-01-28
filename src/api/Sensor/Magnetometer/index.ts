@@ -18,7 +18,7 @@ class MagnetometerSensor {
 
   removeListener(listener) {
     magnetometerEventEmitter.removeListener(
-      Magnetometer.ACCELEROMETER_CHANGE_EVENT,
+      Magnetometer.MAGNETOMETER_CHANGE_EVENT,
       listener
     );
   }

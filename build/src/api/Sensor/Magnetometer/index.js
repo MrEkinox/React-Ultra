@@ -22,7 +22,7 @@ class MagnetometerSensor {
         magnetometerEventEmitter.addListener(Magnetometer.MAGNETOMETER_CHANGE_EVENT, listener);
     }
     removeListener(listener) {
-        magnetometerEventEmitter.removeListener(Magnetometer.ACCELEROMETER_CHANGE_EVENT, listener);
+        magnetometerEventEmitter.removeListener(Magnetometer.MAGNETOMETER_CHANGE_EVENT, listener);
     }
 }
 exports.default = new MagnetometerSensor();

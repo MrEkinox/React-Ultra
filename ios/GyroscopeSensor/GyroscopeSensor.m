@@ -55,13 +55,13 @@ static const NSString *GYROSCOPE_CHANGE_EVENT = @"GyroscopeChanged";
     [payload setObject:[NSNumber numberWithFloat:z] forKey:@"z"];
     
     if (hasListeners)
-        [self sendEventWithName:ACCELEROMETER_CHANGE_EVENT body:payload];
+        [self sendEventWithName:GYROSCOPE_CHANGE_EVENT body:payload];
 }
 
 RCT_REMAP_METHOD(isSupported,
                  isSupportedResolver:(RCTPromiseResolveBlock)resolve
                  isSupportedRejecter:(RCTPromiseRejectBlock)reject) {
-    if ([self.motionManager isGyroAvailable])
+    if ([self->motionManager isGyroAvailable])
         resolve(@YES);
     else
         resolve(@NO);
@@ -69,7 +69,7 @@ RCT_REMAP_METHOD(isSupported,
 
 - (void)dealloc
 {
-    [self.motionManager stopGyroUpdates];
+    [self->motionManager stopGyroUpdates];
 }
 
 - (NSArray<NSString *> *)supportedEvents {

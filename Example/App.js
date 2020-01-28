@@ -11,6 +11,7 @@ import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import BatterySensor from './BatterySensor';
 import AccelerometerSensor from './AccelerometerSensor';
 import GyroscopeSensor from './GyroscopeSensor';
+import MagnetometerSensor from './MagnetometerSensor';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <BatterySensor></BatterySensor>
         <AccelerometerSensor></AccelerometerSensor>
         <GyroscopeSensor></GyroscopeSensor>
+        <MagnetometerSensor></MagnetometerSensor>
       </ScrollView>
     </SafeAreaView>
   );

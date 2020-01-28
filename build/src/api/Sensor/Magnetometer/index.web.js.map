@@ -1,0 +1,1 @@
+{"version":3,"file":"index.web.js","sourceRoot":"","sources":["../../../../../src/api/Sensor/Magnetometer/index.web.ts"],"names":[],"mappings":";;;;;;;;;;;AAGA,MAAM,kBAAkB;IAChB,WAAW;;YACf,OAAO,KAAK,CAAA;QACd,CAAC;KAAA;IAED,WAAW,CAAC,QAAyC;IACrD,CAAC;IAED,cAAc,CAAC,QAAQ;IACvB,CAAC;CACF;AAED,kBAAe,IAAI,kBAAkB,EAAE,CAAC"}

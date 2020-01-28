@@ -1,6 +1,6 @@
 import { ProximityData } from "./interfaces";
 
-export default class ProximitySensor {
+class ProximitySensor {
   async isSupported(): Promise<boolean> {
     return "ondeviceproximity" in window || "onuserproximity" in window;
   }
@@ -32,3 +32,5 @@ export default class ProximitySensor {
     window.removeEventListener("userproximity", listener);
   }
 }
+
+export default new ProximitySensor();

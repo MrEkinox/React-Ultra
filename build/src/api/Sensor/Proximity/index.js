@@ -25,5 +25,5 @@ class ProximitySensor {
         proximityEventEmitter.removeListener(Proximity.PROXIMITY_CHANGE_EVENT, listener);
     }
 }
-exports.default = ProximitySensor;
+exports.default = new ProximitySensor();
 //# sourceMappingURL=index.js.map

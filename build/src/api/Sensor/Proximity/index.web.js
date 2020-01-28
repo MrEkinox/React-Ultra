@@ -36,5 +36,5 @@ class ProximitySensor {
         window.removeEventListener("userproximity", listener);
     }
 }
-exports.default = ProximitySensor;
+exports.default = new ProximitySensor();
 //# sourceMappingURL=index.web.js.map

@@ -4,7 +4,7 @@ import { ProximityData } from "./interfaces";
 const Proximity = NativeModules.ProximitySensor;
 const proximityEventEmitter = new NativeEventEmitter(Proximity);
 
-export default class ProximitySensor {
+class ProximitySensor {
   async isSupported(): Promise<boolean> {
     return Proximity.isSupported();
   }
@@ -23,3 +23,5 @@ export default class ProximitySensor {
     );
   }
 }
+
+export default new ProximitySensor();

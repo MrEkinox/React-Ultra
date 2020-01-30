@@ -77,7 +77,7 @@ static const NSString *PROXIMITY_CHANGE_EVENT = @"proximityChanged";
     BOOL proximityState = [[UIDevice currentDevice] proximityState];
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:1];
     
-    [payload setObject:[NSNumber numberWithBool:proximityState] forKey:@"state"];
+    [payload setObject:[NSNumber numberWithBool:proximityState] forKey:@"isNear"];
     
     if (hasListeners)
         [self sendEventWithName:PROXIMITY_CHANGE_EVENT body:payload];

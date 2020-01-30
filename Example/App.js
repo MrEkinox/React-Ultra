@@ -13,6 +13,7 @@ import AccelerometerSensor from './AccelerometerSensor';
 import GyroscopeSensor from './GyroscopeSensor';
 import MagnetometerSensor from './MagnetometerSensor';
 import ProximitySensor from './ProximitySensor';
+import PedometerSensor from './PedometerSensor';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <GyroscopeSensor></GyroscopeSensor>
         <MagnetometerSensor></MagnetometerSensor>
         <ProximitySensor></ProximitySensor>
+        <PedometerSensor></PedometerSensor>
       </ScrollView>
     </SafeAreaView>
   );

@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.5",
-    "react-ultra": "git+https://github.com/MrEkinox/React-Ultra.git"
+    "react-ultra": "https://github.com/MrEkinox/React-Ultra"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

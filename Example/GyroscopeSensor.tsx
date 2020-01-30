@@ -28,7 +28,6 @@ export default class Gyroscope extends React.PureComponent<{}, State> {
     GyroscopeSensor.isSupported().then(isSupported =>
       this.setState({isSupported}),
     );
-    this.startListener();
   }
 
   componentWillUnmount() {

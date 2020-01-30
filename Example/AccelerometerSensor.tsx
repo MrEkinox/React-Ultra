@@ -28,7 +28,6 @@ export default class Accelerometer extends React.PureComponent<{}, State> {
     AccelerometerSensor.isSupported().then(isSupported =>
       this.setState({isSupported}),
     );
-    this.startListener();
   }
 
   componentWillUnmount() {

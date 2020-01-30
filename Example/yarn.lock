@@ -5118,9 +5118,19 @@ react-timer-mixin@^0.13.4:
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
   integrity sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q==
 
+"react-ultra@git+https://github.com/MrEkinox/React-Ultra.git":
+  version "1.0.0"
+  resolved "git+https://github.com/MrEkinox/React-Ultra.git#46f4d9b503e9dc4c7e09be78c329f9589e458e64"
+  dependencies:
+    lodash "^4.17.15"
+    react "^16.12.0"
+    react-native "^0.61.5"
+    react-native-web "^0.12.0-rc.1"
+
 "react-ultra@https://github.com/MrEkinox/React-Ultra":
   version "1.0.0"
-  resolved "https://github.com/MrEkinox/React-Ultra#666a5ca9e6af0501b49c264fe94487d90158e052"
+  uid "46f4d9b503e9dc4c7e09be78c329f9589e458e64"
+  resolved "https://github.com/MrEkinox/React-Ultra#46f4d9b503e9dc4c7e09be78c329f9589e458e64"
   dependencies:
     lodash "^4.17.15"
     react "^16.12.0"

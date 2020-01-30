@@ -22,7 +22,6 @@ export default class Battery extends React.PureComponent<{}, State> {
     BatterySensor.getLevel().then(level => this.setState({level}));
     BatterySensor.isCharging().then(charging => this.setState({charging}));
     BatterySensor.isSupported().then(supported => this.setState({supported}));
-    this.startListener();
   }
 
   componentWillUnmount() {

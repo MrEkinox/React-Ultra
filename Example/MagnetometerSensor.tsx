@@ -26,7 +26,6 @@ export default class Magnetometer extends React.PureComponent<{}, State> {
 
   componentDidMount() {
     MagnetometerSensor.isSupported().then(supported => this.setState({supported}));
-    this.startListener();
   }
 
   componentWillUnmount() {

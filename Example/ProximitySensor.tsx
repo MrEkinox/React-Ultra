@@ -28,7 +28,6 @@ export default class Proximity extends React.PureComponent<{}, State> {
 
   componentDidMount() {
     ProximitySensor.isSupported().then(supported => this.setState({supported}));
-    this.startListener();
   }
 
   componentWillUnmount() {
@@ -50,19 +49,19 @@ export default class Proximity extends React.PureComponent<{}, State> {
   }
 
   render() {
+    const {recording, supported, data} = this.state;
+    const {isNear, distance, minDistance, maxDistance} = data;
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.state.recording ? this.stopListener() : this.startListener()
-        }
+        onPress={() => (recording ? this.stopListener() : this.startListener())}
         style={styles.card}>
-        <Text style={styles.title}>Battery</Text>
-        <Text>Recording : {this.state.recording ? 'YES' : 'NO'}</Text>
-        <Text>isNear : {this.state.data.isNear}</Text>
-        <Text>Distance : {this.state.data.distance}</Text>
-        <Text>MinDistance : {this.state.data.minDistance}</Text>
-        <Text>MaxDistance : {this.state.data.maxDistance}</Text>
-        <Text>Supported : {this.state.supported ? 'YES' : 'NO'}</Text>
+        <Text style={styles.title}>Proximity</Text>
+        <Text>Recording : {recording ? 'YES' : 'NO'}</Text>
+        <Text>Detect : {isNear ? 'YES' : 'NO'}</Text>
+        <Text>Distance : {distance ? distance : 'NOT SUPPORTED'}</Text>
+        <Text>MinDistance : {minDistance ? minDistance : 'NOT SUPPORTED'}</Text>
+        <Text>MaxDistance : {maxDistance ? maxDistance : 'NOT SUPPORTED'}</Text>
+        <Text>Supported : {supported ? 'YES' : 'NO'}</Text>
       </TouchableOpacity>
     );
   }

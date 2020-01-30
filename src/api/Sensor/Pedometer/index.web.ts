@@ -1,5 +1,5 @@
-export default class StepCounter {
-  isSupported(): boolean {
+class PedometerSensor {
+  async isSupported(): Promise<boolean> {
     return "ondevicemotion" in window || "ondeviceorientation" in window;
   }
 
@@ -30,3 +30,5 @@ export default class StepCounter {
     window.removeEventListener("deviceorientation", listener);
   }
 }
+
+export default new PedometerSensor();

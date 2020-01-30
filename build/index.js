@@ -10,4 +10,6 @@ var Magnetometer_1 = require("./src/api/Sensor/Magnetometer");
 exports.MagnetometerSensor = Magnetometer_1.default;
 var Proximity_1 = require("./src/api/Sensor/Proximity");
 exports.ProximitySensor = Proximity_1.default;
+var Pedometer_1 = require("./src/api/Sensor/Pedometer");
+exports.PedometerSensor = Pedometer_1.default;
 //# sourceMappingURL=index.js.map

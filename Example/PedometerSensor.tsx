@@ -70,19 +70,11 @@ export default class Pedometer extends React.PureComponent<{}, State> {
         <Text style={styles.title}>Pedometer</Text>
         <Text>Recording : {recording ? 'YES' : 'NO'}</Text>
         <Text>numberOfSteps : {numberOfSteps}</Text>
-        <Text>
-          averageActivePace :{' '}
-          {averageActivePace ? averageActivePace : 'NOT SUPPORTED'}
-        </Text>
-        <Text>currentPace : {currentPace ? currentPace : 'NOT SUPPORTED'}</Text>
-        <Text>distance : {distance ? distance : 'NOT SUPPORTED'}</Text>
-        <Text>
-          floorsAscended : {floorsAscended ? floorsAscended : 'NOT SUPPORTED'}
-        </Text>
-        <Text>
-          floorsDescended :{' '}
-          {floorsDescended ? floorsDescended : 'NOT SUPPORTED'}
-        </Text>
+        <Text>averageActivePace : {averageActivePace}</Text>
+        <Text>currentPace : {currentPace}</Text>
+        <Text>distance : {distance}</Text>
+        <Text>floorsAscended : {floorsAscended}</Text>
+        <Text>floorsDescended : {floorsDescended}</Text>
         <Text>Supported : {supported ? 'YES' : 'NO'}</Text>
       </TouchableOpacity>
     );

@@ -78,21 +78,21 @@ RCT_REMAP_METHOD(isSupported,
 
 -(void)pedometerChanged:(CMPedometerData*)pedometerData {
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:7];
-    NSNumber *numberOfSteps = pedometerData.numberOfSteps;
-    NSNumber *averageActivePace = pedometerData.averageActivePace;
-    NSNumber *currentCadence = pedometerData.currentCadence;
-    NSNumber *currentPace = pedometerData.currentPace;
-    NSNumber *distance = pedometerData.distance;
-    NSNumber *floorsAscended = pedometerData.floorsAscended;
-    NSNumber *floorsDescended = pedometerData.floorsDescended;
+    double numberOfSteps = [pedometerData.numberOfSteps doubleValue];
+    double averageActivePace = [pedometerData.averageActivePace doubleValue];
+    double currentCadence = [pedometerData.currentCadence doubleValue];
+    double currentPace = [pedometerData.currentPace doubleValue];
+    double distance = [pedometerData.distance doubleValue];
+    double floorsAscended = [pedometerData.floorsAscended doubleValue];
+    double floorsDescended = [pedometerData.floorsDescended doubleValue];
     
-    [payload setObject:numberOfSteps forKey:@"numberOfSteps"];
-    [payload setObject:averageActivePace forKey:@"averageActivePace"];
-    [payload setObject:currentCadence forKey:@"currentCadence"];
-    [payload setObject:currentPace forKey:@"currentPace"];
-    [payload setObject:distance forKey:@"distance"];
-    [payload setObject:floorsAscended forKey:@"floorsAscended"];
-    [payload setObject:floorsDescended forKey:@"floorsDescended"];
+    [payload setObject:[NSNumber numberWithFloat:numberOfSteps] forKey:@"numberOfSteps"];
+    [payload setObject:[NSNumber numberWithFloat:averageActivePace] forKey:@"averageActivePace"];
+    [payload setObject:[NSNumber numberWithFloat:currentCadence] forKey:@"currentCadence"];
+    [payload setObject:[NSNumber numberWithFloat:currentPace] forKey:@"currentPace"];
+    [payload setObject:[NSNumber numberWithFloat:distance] forKey:@"distance"];
+    [payload setObject:[NSNumber numberWithFloat:floorsAscended] forKey:@"floorsAscended"];
+    [payload setObject:[NSNumber numberWithFloat:floorsDescended] forKey:@"floorsDescended"];
     
     if (hasListeners)
         [self sendEventWithName:PEDOMETER_CHANGE_EVENT body:payload];

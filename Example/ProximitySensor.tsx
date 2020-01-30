@@ -58,9 +58,9 @@ export default class Proximity extends React.PureComponent<{}, State> {
         <Text style={styles.title}>Proximity</Text>
         <Text>Recording : {recording ? 'YES' : 'NO'}</Text>
         <Text>Detect : {isNear ? 'YES' : 'NO'}</Text>
-        <Text>Distance : {distance ? distance : 'NOT SUPPORTED'}</Text>
-        <Text>MinDistance : {minDistance ? minDistance : 'NOT SUPPORTED'}</Text>
-        <Text>MaxDistance : {maxDistance ? maxDistance : 'NOT SUPPORTED'}</Text>
+        <Text>Distance : {distance}</Text>
+        <Text>MinDistance : {minDistance}</Text>
+        <Text>MaxDistance : {maxDistance}</Text>
         <Text>Supported : {supported ? 'YES' : 'NO'}</Text>
       </TouchableOpacity>
     );

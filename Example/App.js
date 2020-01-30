@@ -21,6 +21,7 @@ const App = () => {
       <ScrollView style={styles.scrollView}>
         <BatterySensor></BatterySensor>
         <AccelerometerSensor></AccelerometerSensor>
+        <AccelerometerSensor></AccelerometerSensor>
         <GyroscopeSensor></GyroscopeSensor>
         <MagnetometerSensor></MagnetometerSensor>
         <ProximitySensor></ProximitySensor>

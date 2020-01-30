@@ -8,16 +8,21 @@
 #import "MagnetometerSensor.h"
 
 @implementation MagnetometerSensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    if ([self->motionManager isMagnetometerAvailable])
+    {
+        [self->motionManager startMagnetometerUpdates];
+        [self->motionManager startMagnetometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMMagnetometerData *magnetometerData, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self magnetometerChanged:magnetometerData];
+            });
+        }];
+    }
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [self->motionManager stopMagnetometerUpdates];
 }
 
 
@@ -26,20 +31,9 @@ RCT_EXPORT_MODULE();
 static const NSString *MAGNETOMETER_CHANGE_EVENT = @"MagnetometerChanged";
 
 - (id) init {
-    self = [super init];
-    
-    if (self){
+    if (self = [super init]){
         self->motionManager = [[CMMotionManager alloc] init];
         self->motionManager.magnetometerUpdateInterval = 0.1;
-        if ([self->motionManager isMagnetometerAvailable])
-        {
-            [self->motionManager startMagnetometerUpdates];
-            [self->motionManager startMagnetometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMMagnetometerData *magnetometerData, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self magnetometerChanged:magnetometerData];
-                });
-            }];
-        }
     }
     return self;
 }
@@ -51,11 +45,6 @@ RCT_REMAP_METHOD(isSupported,
         resolve(@YES);
     else
         resolve(@NO);
-}
-
-- (void)dealloc
-{
-    [self->motionManager stopMagnetometerUpdates];
 }
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -87,8 +76,7 @@ RCT_REMAP_METHOD(isSupported,
     [payload setObject:[NSNumber numberWithFloat:y] forKey:@"y"];
     [payload setObject:[NSNumber numberWithFloat:z] forKey:@"z"];
     
-    if (hasListeners)
-        [self sendEventWithName:MAGNETOMETER_CHANGE_EVENT body:payload];
+    [self sendEventWithName:MAGNETOMETER_CHANGE_EVENT body:payload];
 }
 
 @end

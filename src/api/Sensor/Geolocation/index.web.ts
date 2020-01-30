@@ -1,7 +1,7 @@
 import { GeolocationData, GeolocationOptions } from "./interfaces";
 
-export default class Geolocation {
-  isSupported(): boolean {
+class Geolocation {
+  async isSupported(): Promise<boolean> {
     return "geolocation" in navigator;
   }
 
@@ -31,3 +31,5 @@ export default class Geolocation {
     return navigator.geolocation.clearWatch(watchId);
   }
 }
+
+export default new Geolocation()

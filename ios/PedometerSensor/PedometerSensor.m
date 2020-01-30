@@ -9,16 +9,20 @@
 #import <React/RCTLog.h>
 
 @implementation PedometerSensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    if ([CMPedometer isStepCountingAvailable])
+    {
+        [self->pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData *pedometerData, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self pedometerChanged:pedometerData];
+            });
+        }];
+    }
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [self->pedometer stopPedometerUpdates];
 }
 
 
@@ -27,18 +31,8 @@ RCT_EXPORT_MODULE();
 static const NSString *PEDOMETER_CHANGE_EVENT = @"PedometerChanged";
 
 - (id) init {
-    self = [super init];
-    
-    if (self){
+    if (self = [super init]){
         self->pedometer = [[CMPedometer alloc] init];
-        if ([CMPedometer isStepCountingAvailable])
-        {
-            [self->pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData *pedometerData, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self pedometerChanged:pedometerData];
-                });
-            }];
-        }
     }
     return self;
 }
@@ -50,11 +44,6 @@ RCT_REMAP_METHOD(isSupported,
         resolve(@YES);
     else
         resolve(@NO);
-}
-
-- (void)dealloc
-{
-    [self->pedometer stopPedometerUpdates];
 }
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -94,8 +83,7 @@ RCT_REMAP_METHOD(isSupported,
     [payload setObject:[NSNumber numberWithFloat:floorsAscended] forKey:@"floorsAscended"];
     [payload setObject:[NSNumber numberWithFloat:floorsDescended] forKey:@"floorsDescended"];
     
-    if (hasListeners)
-        [self sendEventWithName:PEDOMETER_CHANGE_EVENT body:payload];
+    [self sendEventWithName:PEDOMETER_CHANGE_EVENT body:payload];
 }
 
 @end

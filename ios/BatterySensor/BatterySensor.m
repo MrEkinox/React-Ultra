@@ -9,16 +9,24 @@
 #import "BatterySensor.h"
 
 @implementation BatterySensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(batteryLevelChanged:)
+                                                     name:UIDeviceBatteryLevelDidChangeNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(batteryLevelChanged:)
+                                                     name:UIDeviceBatteryStateDidChangeNotification
+                                                   object:nil];
+    });
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 RCT_EXPORT_MODULE();
@@ -52,29 +60,6 @@ RCT_REMAP_METHOD(getLevel,
 
 static const NSString *BATTERY_CHANGE_EVENT = @"batteryChanged";
 
-- (instancetype)init
-{
-    if((self = [super init])) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
-        });
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(batteryLevelChanged:)
-                                                     name:UIDeviceBatteryLevelDidChangeNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(batteryLevelChanged:)
-                                                     name:UIDeviceBatteryStateDidChangeNotification
-                                                   object:nil];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[BATTERY_CHANGE_EVENT];
@@ -104,8 +89,7 @@ static const NSString *BATTERY_CHANGE_EVENT = @"batteryChanged";
     [payload setObject:[NSNumber numberWithBool:isCharging] forKey:@"charging"];
     [payload setObject:[NSNumber numberWithFloat:batteryLevel] forKey:@"level"];
     
-    if (hasListeners)
-        [self sendEventWithName:BATTERY_CHANGE_EVENT body:payload];
+    [self sendEventWithName:BATTERY_CHANGE_EVENT body:payload];
 }
 
 @end

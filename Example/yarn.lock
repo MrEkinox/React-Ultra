@@ -5120,7 +5120,7 @@ react-timer-mixin@^0.13.4:
 
 "react-ultra@https://github.com/MrEkinox/React-Ultra":
   version "1.0.0"
-  resolved "https://github.com/MrEkinox/React-Ultra#0aff3c97dc2bf68537f5b115856ca79c7331a56e"
+  resolved "https://github.com/MrEkinox/React-Ultra#93aa2c84b878c5e3f71a9a9a4fc71b2626753aa8"
   dependencies:
     lodash "^4.17.15"
     react "^16.12.0"

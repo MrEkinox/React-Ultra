@@ -10,16 +10,22 @@
 #import <React/RCTLog.h>
 
 @implementation AccelerometerSensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    if ([self->motionManager isAccelerometerAvailable])
+    {
+        [self->motionManager startAccelerometerUpdates];
+        [self->motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+            RCTLogInfo(@"Accelerometer Updates");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self accelerometerChanged:accelerometerData];
+            });
+        }];
+    }
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [self->motionManager stopAccelerometerUpdates];
 }
 
 
@@ -28,19 +34,9 @@ RCT_EXPORT_MODULE();
 static const NSString *ACCELEROMETER_CHANGE_EVENT = @"AccelerometerChanged";
 
 - (id) init {
-    self = [super init];
-    if (self){
+    if (self = [super init]){
         self->motionManager = [[CMMotionManager alloc] init];
         self->motionManager.accelerometerUpdateInterval = 0.1;
-        if ([self->motionManager isAccelerometerAvailable])
-        {
-            [self->motionManager startAccelerometerUpdates];
-            [self->motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self accelerometerChanged:accelerometerData];
-                });
-            }];
-        }
     }
     return self;
 }
@@ -52,11 +48,6 @@ RCT_REMAP_METHOD(isSupported,
         resolve(@YES);
     else
         resolve(@NO);
-}
-
-- (void)dealloc
-{
-    [self->motionManager stopAccelerometerUpdates];
 }
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -88,8 +79,7 @@ RCT_REMAP_METHOD(isSupported,
     [payload setObject:[NSNumber numberWithFloat:y] forKey:@"y"];
     [payload setObject:[NSNumber numberWithFloat:z] forKey:@"z"];
     
-    if (hasListeners)
-        [self sendEventWithName:ACCELEROMETER_CHANGE_EVENT body:payload];
+    [self sendEventWithName:ACCELEROMETER_CHANGE_EVENT body:payload];
 }
 
 @end

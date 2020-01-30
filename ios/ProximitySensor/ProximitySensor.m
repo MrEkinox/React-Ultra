@@ -8,16 +8,20 @@
 #import "ProximitySensor.h"
 
 @implementation ProximitySensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(proximityChanged:)
+                                                     name:UIDeviceProximityStateDidChangeNotification
+                                                   object:nil];
+    });
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 RCT_EXPORT_MODULE();
@@ -33,26 +37,6 @@ RCT_REMAP_METHOD(isSupported,
 }
 
 static const NSString *PROXIMITY_CHANGE_EVENT = @"proximityChanged";
-
-- (instancetype)init
-{
-    if((self = [super init])) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-        });
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(proximityChanged:)
-                                                     name:UIDeviceProximityStateDidChangeNotification
-                                                   object:nil];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[PROXIMITY_CHANGE_EVENT];
@@ -79,8 +63,7 @@ static const NSString *PROXIMITY_CHANGE_EVENT = @"proximityChanged";
     
     [payload setObject:[NSNumber numberWithBool:proximityState] forKey:@"isNear"];
     
-    if (hasListeners)
-        [self sendEventWithName:PROXIMITY_CHANGE_EVENT body:payload];
+    [self sendEventWithName:PROXIMITY_CHANGE_EVENT body:payload];
 }
 
 @end

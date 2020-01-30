@@ -9,16 +9,21 @@
 #import "GyroscopeSensor.h"
 
 @implementation GyroscopeSensor
-{
-    bool hasListeners;
-}
 
 -(void)startObserving {
-    hasListeners = YES;
+    if ([self->motionManager isGyroAvailable])
+    {
+        [self->motionManager startGyroUpdates];
+        [self->motionManager startGyroUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMGyroData *gyroData, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self gyroscopeChanged:gyroData];
+            });
+        }];
+    }
 }
 
 -(void)stopObserving {
-    hasListeners = NO;
+    [self->motionManager stopGyroUpdates];
 }
 
 RCT_EXPORT_MODULE();
@@ -26,20 +31,9 @@ RCT_EXPORT_MODULE();
 static const NSString *GYROSCOPE_CHANGE_EVENT = @"GyroscopeChanged";
 
 - (id) init {
-    self = [super init]; 
-    
-    if (self){
+    if (self = [super init]){
         self->motionManager = [[CMMotionManager alloc] init];
         self->motionManager.gyroUpdateInterval = 0.1;
-        if ([self->motionManager isGyroAvailable])
-        {
-            [self->motionManager startGyroUpdates];
-            [self->motionManager startGyroUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMGyroData *gyroData, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self gyroscopeChanged:gyroData];
-                });
-            }];
-        }
     }
     return self;
 } 
@@ -54,8 +48,7 @@ static const NSString *GYROSCOPE_CHANGE_EVENT = @"GyroscopeChanged";
     [payload setObject:[NSNumber numberWithFloat:y] forKey:@"y"];
     [payload setObject:[NSNumber numberWithFloat:z] forKey:@"z"];
     
-    if (hasListeners)
-        [self sendEventWithName:GYROSCOPE_CHANGE_EVENT body:payload];
+    [self sendEventWithName:GYROSCOPE_CHANGE_EVENT body:payload];
 }
 
 RCT_REMAP_METHOD(isSupported,
@@ -65,11 +58,6 @@ RCT_REMAP_METHOD(isSupported,
         resolve(@YES);
     else
         resolve(@NO);
-}
-
-- (void)dealloc
-{
-    [self->motionManager stopGyroUpdates];
 }
 
 - (NSArray<NSString *> *)supportedEvents {

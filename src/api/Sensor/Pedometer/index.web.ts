@@ -1,10 +1,11 @@
+import { PedometerData } from "./interfaces";
 class PedometerSensor {
   async isSupported(): Promise<boolean> {
     return "ondevicemotion" in window || "ondeviceorientation" in window;
   }
 
-  addListener(listener: (steps: number) => void) {
-    var steps = 0;
+  addListener(listener: (data: PedometerData) => void) {
+    var numberOfSteps = 0;
     var accelerateY = 0;
     var flag = false;
     window.addEventListener(
@@ -18,9 +19,9 @@ class PedometerSensor {
       if (!beta) return;
       if (accelerateY - 10 * Math.sin((beta * Math.PI) / 180) > 1) flag = true;
       if (accelerateY - 10 * Math.sin((beta * Math.PI) / 180) < -1 && flag) {
-        steps += 1;
+        numberOfSteps += 1;
         flag = false;
-        listener(steps);
+        listener({ numberOfSteps });
       }
     });
   }

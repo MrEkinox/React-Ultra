@@ -1,4 +1,5 @@
 import { NativeModules, NativeEventEmitter } from "react-native";
+import { PedometerData } from './interfaces';
 
 const Pedometer = NativeModules.PedometerSensor;
 const pedometerEventEmitter = new NativeEventEmitter(Pedometer);
@@ -8,7 +9,7 @@ class PedometerSensor {
     return Pedometer.isSupported();
   }
 
-  addListener(listener: (steps: number) => any) {
+  addListener(listener: (data: PedometerData) => any) {
     pedometerEventEmitter.addListener(
       Pedometer.PEDOMETER_CHANGE_EVENT,
       listener

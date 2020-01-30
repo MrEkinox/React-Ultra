@@ -12,7 +12,7 @@ interface State {
 
 export default class Battery extends React.PureComponent<{}, State> {
   state: State = {
-    recording: true,
+    recording: false,
     level: -1,
     charging: false,
     supported: false,

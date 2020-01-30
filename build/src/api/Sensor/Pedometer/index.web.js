@@ -16,7 +16,7 @@ class PedometerSensor {
         });
     }
     addListener(listener) {
-        var steps = 0;
+        var numberOfSteps = 0;
         var accelerateY = 0;
         var flag = false;
         window.addEventListener("devicemotion", ({ accelerationIncludingGravity }) => {
@@ -29,9 +29,9 @@ class PedometerSensor {
             if (accelerateY - 10 * Math.sin((beta * Math.PI) / 180) > 1)
                 flag = true;
             if (accelerateY - 10 * Math.sin((beta * Math.PI) / 180) < -1 && flag) {
-                steps += 1;
+                numberOfSteps += 1;
                 flag = false;
-                listener(steps);
+                listener({ numberOfSteps });
             }
         });
     }

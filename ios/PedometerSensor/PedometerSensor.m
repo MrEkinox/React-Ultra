@@ -6,6 +6,7 @@
 //
 
 #import "PedometerSensor.h"
+#import <React/RCTLog.h>
 
 @implementation PedometerSensor
 {
@@ -76,10 +77,25 @@ RCT_REMAP_METHOD(isSupported,
 }
 
 -(void)pedometerChanged:(CMPedometerData*)pedometerData {
-    NSNumber *stepsCount = pedometerData.numberOfSteps;
+    NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:7];
+    NSNumber *numberOfSteps = pedometerData.numberOfSteps;
+    NSNumber *averageActivePace = pedometerData.averageActivePace;
+    NSNumber *currentCadence = pedometerData.currentCadence;
+    NSNumber *currentPace = pedometerData.currentPace;
+    NSNumber *distance = pedometerData.distance;
+    NSNumber *floorsAscended = pedometerData.floorsAscended;
+    NSNumber *floorsDescended = pedometerData.floorsDescended;
+    
+    [payload setObject:numberOfSteps forKey:@"numberOfSteps"];
+    [payload setObject:averageActivePace forKey:@"averageActivePace"];
+    [payload setObject:currentCadence forKey:@"currentCadence"];
+    [payload setObject:currentPace forKey:@"currentPace"];
+    [payload setObject:distance forKey:@"distance"];
+    [payload setObject:floorsAscended forKey:@"floorsAscended"];
+    [payload setObject:floorsDescended forKey:@"floorsDescended"];
     
     if (hasListeners)
-        [self sendEventWithName:PEDOMETER_CHANGE_EVENT body:stepsCount];
+        [self sendEventWithName:PEDOMETER_CHANGE_EVENT body:payload];
 }
 
 @end

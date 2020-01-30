@@ -6,14 +6,28 @@ import styles from './styles';
 interface State {
   recording: boolean;
   supported: boolean;
-  stepsCount: number;
+  data: {
+    numberOfSteps?: number | null;
+    distance?: number | null;
+    averageActivePace?: number | null;
+    currentPace?: number | null;
+    floorsAscended?: number | null;
+    floorsDescended?: number | null;
+  };
 }
 
 export default class Pedometer extends React.PureComponent<{}, State> {
   state: State = {
     recording: true,
     supported: false,
-    stepsCount: 0,
+    data: {
+      numberOfSteps: 0,
+      distance: 0,
+      averageActivePace: 0,
+      currentPace: 0,
+      floorsAscended: 0,
+      floorsDescended: 0,
+    },
   };
 
   componentDidMount() {
@@ -25,8 +39,8 @@ export default class Pedometer extends React.PureComponent<{}, State> {
     this.stopListener();
   }
 
-  onDataChange = stepsCount => {
-    this.setState({stepsCount, recording: true});
+  onDataChange = data => {
+    this.setState({data, recording: true});
   };
 
   startListener() {
@@ -40,14 +54,35 @@ export default class Pedometer extends React.PureComponent<{}, State> {
   }
 
   render() {
-    const {recording, supported, stepsCount} = this.state;
+    const {recording, supported, data} = this.state;
+    const {
+      averageActivePace,
+      currentPace,
+      distance,
+      floorsAscended,
+      floorsDescended,
+      numberOfSteps,
+    } = data;
     return (
       <TouchableOpacity
         onPress={() => (recording ? this.stopListener() : this.startListener())}
         style={styles.card}>
         <Text style={styles.title}>Pedometer</Text>
         <Text>Recording : {recording ? 'YES' : 'NO'}</Text>
-        <Text>Steps : {stepsCount}</Text>
+        <Text>numberOfSteps : {numberOfSteps}</Text>
+        <Text>
+          averageActivePace :{' '}
+          {averageActivePace ? averageActivePace : 'NOT SUPPORTED'}
+        </Text>
+        <Text>currentPace : {currentPace ? currentPace : 'NOT SUPPORTED'}</Text>
+        <Text>distance : {distance ? distance : 'NOT SUPPORTED'}</Text>
+        <Text>
+          floorsAscended : {floorsAscended ? floorsAscended : 'NOT SUPPORTED'}
+        </Text>
+        <Text>
+          floorsDescended :{' '}
+          {floorsDescended ? floorsDescended : 'NOT SUPPORTED'}
+        </Text>
         <Text>Supported : {supported ? 'YES' : 'NO'}</Text>
       </TouchableOpacity>
     );

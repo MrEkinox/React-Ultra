@@ -16,7 +16,7 @@ interface State {
 
 export default class Proximity extends React.PureComponent<{}, State> {
   state: State = {
-    recording: true,
+    recording: false,
     supported: false,
     data: {
       isNear: false,

@@ -1,0 +1,16 @@
+export type HapticType =
+  | "selection"
+  | "impactMedium"
+  | "impactHeavy"
+  | "notificationSuccess"
+  | "notificationWarning"
+  | "notificationError"
+  | "clockTick"
+  | "contextClick"
+  | "keyboardPress"
+  | "keyboardRelease"
+  | "keyboardTap"
+  | "longPress"
+  | "textHandleMove"
+  | "virtualKey"
+  | "virtualKeyRelease";

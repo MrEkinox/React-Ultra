@@ -1,4 +1,4 @@
-export interface QuickActionOptions {
+export interface QuickActionItems {
   title: string;
   type: string;
   subtitle?: string;

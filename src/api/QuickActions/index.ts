@@ -1,11 +1,13 @@
-import { QuickActionOptions } from "./interfaces";
+import { QuickActionItems } from "./interfaces";
 
-export default class QuickActions {
+class QuickActions {
   async isSupported(): Promise<boolean> {
     return false;
   }
 
-  async set(options: QuickActionOptions[]) {}
+  async set(options: QuickActionItems[]) {}
 
   async clear() {}
 }
+
+export default new QuickActions()

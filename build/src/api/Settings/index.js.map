@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../src/api/Settings/index.ts"],"names":[],"mappings":";;;;;;;;;;;AACA,MAAM,QAAQ;IACN,WAAW;;YACf,OAAO,IAAI,CAAC;QACd,CAAC;KAAA;IACD,GAAG,CAAC,YAA0B,IAAG,CAAC;IAClC,IAAI,CAAC,YAA2B,IAAG,CAAC;IACpC,WAAW,CAAC,YAA0B,EAAE,QAAQ,IAAG,CAAC;IACpD,cAAc,CAAC,YAA0B,EAAE,QAAQ,IAAG,CAAC;CACxD;AAED,kBAAe,IAAI,QAAQ,EAAE,CAAC"}

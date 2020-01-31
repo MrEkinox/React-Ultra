@@ -11,22 +11,30 @@
 @implementation BatterySensor
 
 -(void)startObserving {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(batteryLevelChanged:)
-                                                     name:UIDeviceBatteryLevelDidChangeNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(batteryLevelChanged:)
-                                                     name:UIDeviceBatteryStateDidChangeNotification
-                                                   object:nil];
-    });
+    [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryLevelDidChangeNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryStateDidChangeNotification
+                                               object:nil];
 }
 
 -(void)stopObserving {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init
+{
+    if((self = [super init])) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+        });
+    }
+    return self;
 }
 
 RCT_EXPORT_MODULE();
@@ -84,7 +92,7 @@ static const NSString *BATTERY_CHANGE_EVENT = @"batteryChanged";
     UIDeviceBatteryState batteryState = [UIDevice currentDevice].batteryState;
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:2];
     bool isCharging = batteryState == UIDeviceBatteryStateCharging;
-    float batteryLevel = [UIDevice currentDevice].batteryLevel;
+    float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
     
     [payload setObject:[NSNumber numberWithBool:isCharging] forKey:@"charging"];
     [payload setObject:[NSNumber numberWithFloat:batteryLevel] forKey:@"level"];

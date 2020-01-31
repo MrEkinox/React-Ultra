@@ -22,5 +22,5 @@ class QuickActions {
         return __awaiter(this, void 0, void 0, function* () { });
     }
 }
-exports.default = QuickActions;
+exports.default = new QuickActions();
 //# sourceMappingURL=index.web.js.map

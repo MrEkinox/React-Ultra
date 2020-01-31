@@ -1,5 +1,5 @@
-export default class LightSensor {
-  isSupported(): boolean {
+class LightSensor {
+  async isSupported(): Promise<boolean> {
     return "ondevicelight" in window;
   }
 
@@ -13,3 +13,5 @@ export default class LightSensor {
     window.removeEventListener("devicelight", listener);
   }
 }
+
+export default new LightSensor()

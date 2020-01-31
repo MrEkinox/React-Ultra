@@ -8,32 +8,31 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
-import BatterySensor from './BatterySensor';
-import AccelerometerSensor from './AccelerometerSensor';
-import GyroscopeSensor from './GyroscopeSensor';
-import MagnetometerSensor from './MagnetometerSensor';
-import ProximitySensor from './ProximitySensor';
-import PedometerSensor from './PedometerSensor';
+import BatterySensor from './src/BatterySensor';
+import AccelerometerSensor from './src/AccelerometerSensor';
+import GyroscopeSensor from './src/GyroscopeSensor';
+import MagnetometerSensor from './src/MagnetometerSensor';
+import ProximitySensor from './src/ProximitySensor';
+import PedometerSensor from './src/PedometerSensor';
+import Haptic from './src/Haptic';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.scrollView}>
-        <BatterySensor></BatterySensor>
-        <AccelerometerSensor></AccelerometerSensor>
-        <AccelerometerSensor></AccelerometerSensor>
-        <GyroscopeSensor></GyroscopeSensor>
-        <MagnetometerSensor></MagnetometerSensor>
-        <ProximitySensor></ProximitySensor>
-        <PedometerSensor></PedometerSensor>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.scrollView}>
+      <Haptic></Haptic>
+      <BatterySensor></BatterySensor>
+      <AccelerometerSensor></AccelerometerSensor>
+      <GyroscopeSensor></GyroscopeSensor>
+      <MagnetometerSensor></MagnetometerSensor>
+      <ProximitySensor></ProximitySensor>
+      <PedometerSensor></PedometerSensor>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
-    height: "100%"
+    height: '100%',
   },
 });
 

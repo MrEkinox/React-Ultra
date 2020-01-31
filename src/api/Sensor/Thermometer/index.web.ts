@@ -1,5 +1,5 @@
 export default class ThermometerSensor {
-  isSupported(): boolean {
+  async isSupported(): Promise<boolean> {
     return false;
   }
 

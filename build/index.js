@@ -16,4 +16,6 @@ var Geolocation_1 = require("./src/api/Sensor/Geolocation");
 exports.Geolocation = Geolocation_1.default;
 var Haptic_1 = require("./src/api/Haptic");
 exports.Haptic = Haptic_1.default;
+var QuickActions_1 = require("./src/api/QuickActions");
+exports.QuickActions = QuickActions_1.default;
 //# sourceMappingURL=index.js.map

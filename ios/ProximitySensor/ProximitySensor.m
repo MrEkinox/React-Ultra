@@ -10,18 +10,24 @@
 @implementation ProximitySensor
 
 -(void)startObserving {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(proximityChanged:)
-                                                     name:UIDeviceProximityStateDidChangeNotification
-                                                   object:nil];
-    });
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(proximityChanged:)
+                                                 name:UIDeviceProximityStateDidChangeNotification
+                                               object:nil];
 }
 
 -(void)stopObserving {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init
+{
+    if((self = [super init])) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+        });
+    }
+    return self;
 }
 
 RCT_EXPORT_MODULE();

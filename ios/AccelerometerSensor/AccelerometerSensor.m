@@ -7,7 +7,6 @@
 //
 
 #import "AccelerometerSensor.h"
-#import <React/RCTLog.h>
 
 @implementation AccelerometerSensor
 
@@ -16,7 +15,6 @@
     {
         [self->motionManager startAccelerometerUpdates];
         [self->motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-            RCTLogInfo(@"Accelerometer Updates");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self accelerometerChanged:accelerometerData];
             });

@@ -6,3 +6,4 @@ export { default as ProximitySensor } from "./src/api/Sensor/Proximity";
 export { default as PedometerSensor } from "./src/api/Sensor/Pedometer";
 export { default as Geolocation } from "./src/api/Sensor/Geolocation";
 export { default as Haptic } from "./src/api/Haptic";
+export { default as QuickActions } from "./src/api/QuickActions";

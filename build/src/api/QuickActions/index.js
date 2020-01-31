@@ -9,17 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const react_native_1 = require("react-native");
+const QuickActionsSystem = react_native_1.NativeModules.QuickActions;
 class QuickActions {
     isSupported() {
         return __awaiter(this, void 0, void 0, function* () {
-            return false;
+            return QuickActionsSystem.isSupported();
         });
     }
-    set(options) {
-        return __awaiter(this, void 0, void 0, function* () { });
+    set(items) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return QuickActionsSystem.set(items);
+        });
     }
     clear() {
-        return __awaiter(this, void 0, void 0, function* () { });
+        return __awaiter(this, void 0, void 0, function* () {
+            return QuickActionsSystem.clear();
+        });
     }
 }
 exports.default = new QuickActions();

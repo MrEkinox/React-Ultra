@@ -18,7 +18,7 @@ import Haptic from './src/Haptic';
 
 const App = () => {
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView contentInsetAdjustmentBehavior="always" style={styles.scrollView}>
       <Haptic></Haptic>
       <BatterySensor></BatterySensor>
       <AccelerometerSensor></AccelerometerSensor>

@@ -18,7 +18,7 @@ interface State {
 
 export default class Pedometer extends React.PureComponent<{}, State> {
   state: State = {
-    recording: true,
+    recording: false,
     supported: false,
     data: {
       numberOfSteps: 0,
@@ -32,7 +32,6 @@ export default class Pedometer extends React.PureComponent<{}, State> {
 
   componentDidMount() {
     PedometerSensor.isSupported().then(supported => this.setState({supported}));
-    this.startListener();
   }
 
   componentWillUnmount() {

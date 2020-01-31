@@ -1,4 +1,4 @@
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, TouchableOpacity, Platform} from 'react-native';
 import React from 'react';
 import {Haptic} from 'react-ultra';
 import styles from './styles';
@@ -16,7 +16,21 @@ export default class Pedometer extends React.PureComponent<{}, State> {
     Haptic.isSupported().then(supported => this.setState({supported}));
   }
 
-  componentWillUnmount() {}
+  renderButton(triggerType) {
+    return (
+      <TouchableOpacity
+        style={{
+          borderTopWidth: 1,
+          paddingVertical: 5,
+          borderColor: 'lightgrey',
+          paddingTop: 5,
+          marginTop: 5,
+        }}
+        onPress={() => Haptic.trigger(triggerType)}>
+        <Text>{triggerType}</Text>
+      </TouchableOpacity>
+    );
+  }
 
   render() {
     const {supported} = this.state;
@@ -24,71 +38,22 @@ export default class Pedometer extends React.PureComponent<{}, State> {
       <View style={styles.card}>
         <Text style={styles.title}>Haptic</Text>
         <Text>Supported : {supported ? 'YES' : 'NO'}</Text>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('selection')}
-          title="selection"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('impactLight')}
-          title="impactLight"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('impactMedium')}
-          title="impactMedium"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('impactHeavy')}
-          title="impactHeavy"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('notificationSuccess')}
-          title="notificationSuccess"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('notificationWarning')}
-          title="notificationWarning"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('notificationError')}
-          title="notificationError"></Button>
-        <Text>Only for Android</Text>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('clockTick')}
-          title="clockTick"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('contextClick')}
-          title="contextClick"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('keyboardPress')}
-          title="keyboardPress"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('keyboardRelease')}
-          title="keyboardRelease"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('keyboardTap')}
-          title="keyboardTap"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('longPress')}
-          title="longPress"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('textHandleMove')}
-          title="textHandleMove"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('virtualKey')}
-          title="virtualKey"></Button>
-        <Button
-          color="darkgrey"
-          onPress={() => Haptic.trigger('virtualKeyRelease')}
-          title="virtualKeyRelease"></Button>
+        {this.renderButton('selection')}
+        {this.renderButton('impactLight')}
+        {this.renderButton('impactMedium')}
+        {this.renderButton('impactHeavy')}
+        {this.renderButton('notificationSuccess')}
+        {this.renderButton('notificationWarning')}
+        {this.renderButton('notificationError')}
+        {Platform.OS === 'android' && this.renderButton('clockTick')}
+        {Platform.OS === 'android' && this.renderButton('contextClick')}
+        {Platform.OS === 'android' && this.renderButton('keyboardPress')}
+        {Platform.OS === 'android' && this.renderButton('keyboardRelease')}
+        {Platform.OS === 'android' && this.renderButton('keyboardTap')}
+        {Platform.OS === 'android' && this.renderButton('longPress')}
+        {Platform.OS === 'android' && this.renderButton('textHandleMove')}
+        {Platform.OS === 'android' && this.renderButton('virtualKey')}
+        {Platform.OS === 'android' && this.renderButton('virtualKeyRelease')}
       </View>
     );
   }

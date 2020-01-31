@@ -9,15 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const react_native_1 = require("react-native");
+const HapticSystem = react_native_1.NativeModules.Haptic;
 class Haptic {
     isSupported() {
         return __awaiter(this, void 0, void 0, function* () {
-            return true;
+            return HapticSystem.isSupported();
         });
     }
     trigger(type) {
         return __awaiter(this, void 0, void 0, function* () {
-            return true;
+            return HapticSystem.trigger(type);
         });
     }
 }

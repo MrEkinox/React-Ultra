@@ -1,5 +1,6 @@
 export type HapticType =
   | "selection"
+  | "impactLight"
   | "impactMedium"
   | "impactHeavy"
   | "notificationSuccess"

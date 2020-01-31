@@ -15,7 +15,7 @@ interface State {
 
 export default class Magnetometer extends React.PureComponent<{}, State> {
   state: State = {
-    recording: true,
+    recording: false,
     supported: false,
     data: {
       x: 0,
